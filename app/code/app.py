@@ -6,7 +6,7 @@ import streamlit as st
 # Load trained model
 model = pk.load(open('car-price.model', 'rb'))
 
-st.header("🚗 Car Price Prediction App")
+st.header("Car Price Prediction App")
 
 # User inputs
 year = st.slider('Car Manufactured Year', 1990, 2024, key='year')
@@ -28,7 +28,7 @@ if st.button('Predict Price'):
     car_price = model.predict(input_data_model.values)
 
     # Convert back from log scale
-    #car_price = np.exp(log_price)
+    car_price = np.exp(car_price)
 
     # Show result
-    st.success(f"💰 Estimated Car Price: {car_price[0]:,.2f}")
+    st.success(f"Estimated Car Price: {car_price[0]:,.2f}")
